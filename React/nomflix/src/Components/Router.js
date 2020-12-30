@@ -6,7 +6,7 @@ import Search from "Routes/Search";
 import Detail from "Routes/Detail";
 import Header from "Components/Header";
 
-export default () => (
+const MyRouter = () => (
     <Router>
         <>
             <Header/>
@@ -21,4 +21,6 @@ export default () => (
         </>
 
     </Router>
-)
+);
+
+export default MyRouter;
