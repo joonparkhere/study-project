@@ -29,7 +29,7 @@
       "react-app/jest"
     ]
   },
-  "homepage": "",
+  "homepage": "https://joonparkhere-nomflix.netlify.app",
   "browserslist": {
     "production": [
       ">0.2%",
