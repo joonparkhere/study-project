@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="fragments.html :: head"></head>
+<style>
+    .card-info {
+        float: left;
+        width: 33.33%;
+        padding: 0 20px;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+        margin-top:auto;
+    }
+
+
+
+    .img-thumb{
+        border-radius: 1.04166667vw;
+        width: 100%;
+        margin-bottom: 5px;
+        display: block;
+        vertical-align: top;
+
+    }
+
+    .study-content{
+        overflow: hidden;
+        max-width: 1800px;
+        margin: 0 auto;
+        padding: 76px 60px 0;
+    }
+
+
+    @media (max-width: 1919px) and (min-width: 1441px) {
+        .card-info .img_thumb {
+            border-radius: 1.04166667vw;
+            border-top-left-radius: 1.04167vw;
+            border-top-right-radius: 1.04167vw;
+            border-bottom-right-radius: 1.04167vw;
+            border-bottom-left-radius: 1.04167vw;
+        }
+    }
+
+
+    .link-newsfeed{
+        display: block;
+        position: relative;
+    }
+
+    .tit_newsfeed {
+        display: block;
+        padding-top: 10px;
+        font-size: 20px;
+        line-height: 32px;
+        color: #1e1e1e;
+    }
+
+    .desc_newsfeed {
+        padding-top: 8px;
+        font-size: 14px;
+        line-height: 22px;
+        color: #666;
+    }
+
+</style>
+<body class="bg-light">
+    <div th:replace="fragments.html :: main-nav"></div>
+    <div class="alert alert-warning" role="alert" th:if="${account != null && !account?.emailVerified}">
+        스터디올레 가입을 완료하려면 <a href="#" th:href="@{/check-email(email=${account.email})}" class="alert-link">계정 인증 이메일을 확인</a>하세요.
+    </div>
+
+<div class="container">
+                <h1 th:if="${#lists.isEmpty(enrollmentList)}" style="padding-bottom: 20px">참석할 모임이 없습니다.</h1>
+                <h1 th:if="${!#lists.isEmpty(enrollmentList)}" style="padding-bottom: 20px">참석할 모임</h1>
+
+                <div class="row justify-content-center margin-top-auto" th:if="${!#lists.isEmpty(enrollmentList)}">
+                    <div class="col-sm-12" th:each="enrollment: ${enrollmentList}">
+                        <div class="card-info">
+                            <img src="https://t1.kakaocdn.net/kakaocorp/admin/co/main-content/4540.jpg" class="img-thumb" alt="">
+                            <strong class="tit_newsfeed" th:text="'모임: '+${enrollment.event.title}">Event title</strong>
+                                <strong class="tit_newsfeed" th:text="'스터디: '+${enrollment.event.study.title}">Study title</strong>
+                                <p class="desc_newsfeed">
+                                <span>
+                                    <i class="fa fa-calendar-o"></i>
+                                    <span class="calendar" th:text="${enrollment.event.startDateTime}">Last updated 3 mins ago</span>
+                                </span>
+                                </p>
+                                <a th:href="@{'/study/' + ${enrollment.event.study.path} + '/events/' + ${enrollment.event.id}}" class="card-link">모임 조회</a>
+                                <a th:href="@{'/study/' + ${enrollment.event.study.path}}" class="card-link">스터디 조회</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+    <div th:replace="fragments.html :: footer"></div>
+    <div th:replace="fragments.html :: date-time"></div>
+</body>
+</html>
