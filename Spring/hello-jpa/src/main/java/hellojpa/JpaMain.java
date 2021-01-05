@@ -128,6 +128,48 @@ public class JpaMain {
 //            newTx.commit();
 //            newEm.close();
 
+//            Team team = new Team();
+//            team.setName("TeamA");
+//            em.persist(team);
+//
+//            Member member1 = new Member();
+//            member1.setName("MemberA");
+////            member1.setTeam(team);
+//            member1.changeTeam(team);
+//            em.persist(member1);
+//
+//            Member member2 = new Member();
+//            member2.setName("MemberB");
+////            member2.setTeam(team);
+//            member2.changeTeam(team);
+//            em.persist(member2);
+//
+//            Member member3 = new Member();
+//            member3.setName("MemberC");
+////            team.getMembers().add(member3);     // 역방향
+//            member3.changeTeam(team);
+//            em.persist(member3);
+//
+//            Team findTeam = em.find(Team.class, team.getId());
+//            List<Member> findTeamMembers = findTeam.getMembers();
+//            for (Member m : findTeamMembers) {
+//                // 순수 객체 상태인 경우(1차 캐시에는), 아직 member3만 list에 존재 --> changeTeam 연관관계 편의 메서드
+//                System.out.println("m = " + m + "(" + m.getId() + "): " + m.getName());
+//            }
+//
+//            em.flush();
+//            em.clear();
+//
+//            Member findMember = em.find(Member.class, member1.getId());
+//            System.out.println("team = " + team + ": " + team.getId());
+//            System.out.println("team = " + findMember.getTeam() + ": " + findMember.getTeam().getId());
+//            System.out.println("isEqual = " + (team == findMember.getTeam()));
+//
+//            List<Member> members = findMember.getTeam().getMembers();
+//            for (Member m : members) {
+//                System.out.println("m = " + m.getName());
+//            }
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
