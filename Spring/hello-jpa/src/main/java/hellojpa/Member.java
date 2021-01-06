@@ -11,7 +11,7 @@ import java.util.Date;
         name = "MEMBER_SEQ_GENERATOR",
         sequenceName = "MEMBER_SEQ",
         initialValue = 1, allocationSize = 1)
-public class Member {
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue
@@ -25,6 +25,10 @@ public class Member {
     @ManyToOne
     @JoinColumn(name = "TEAM_ID")
     private Team team;
+
+    @OneToOne
+    @JoinColumn(name = "LOCKER_ID")
+    private Locker locker;
 
     public Member() {
     }
@@ -66,4 +70,11 @@ public class Member {
         this.team = team;
     }
 
+    public Locker getLocker() {
+        return locker;
+    }
+
+    public void setLocker(Locker locker) {
+        this.locker = locker;
+    }
 }
