@@ -1,5 +1,7 @@
 package hellojpa;
 
+import org.hibernate.Hibernate;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
@@ -170,8 +172,53 @@ public class JpaMain {
 //                System.out.println("m = " + m.getName());
 //            }
 
+//            Member member = new Member();
+//            member.setName("memberA");
+//            member.setAge(23);
+//
+//            Team team = new Team();
+//            team.setName("teamA");
+//            member.setTeam(team);
+//
+//            em.persist(member);
+//            em.persist(team);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Member referMember = em.getReference(Member.class, member.getId());
+//            System.out.println("referMember.getClass() = " + referMember.getClass());
+//            System.out.println("isLoaded ? = " + emf.getPersistenceUnitUtil().isLoaded(referMember));
+//
+////            em.detach(referMember);
+//            Hibernate.initialize(referMember);
+//            System.out.println("isLoaded ? = " + emf.getPersistenceUnitUtil().isLoaded(referMember));
+//            System.out.println("referMember = " + referMember.getId() + ": " + referMember.getName());
+//            System.out.println("team = " + referMember.getTeam().getId() + ": " + referMember.getTeam().getName());
+//
+//            Member findMember = em.find(Member.class, member.getId());
+//            System.out.println("findMember.getClass() = " + findMember.getClass());
+//
+//            System.out.println("isEqualClass ? = " + (referMember.getClass() == findMember.getClass()));
+//
+//            System.out.println("isMemberClass = " + (referMember instanceof Member) + ", " + (findMember instanceof Member));
+
+            Member member1 = new Member();
+            Member member2 = new Member();
+
+            Team team = new Team();
+            team.setName("teamA");
+
+            team.addMember(member1);
+            team.addMember(member2);
+
+            em.persist(team);
+
+            team.getMembers().remove(0);
+
             tx.commit();
         } catch (Exception e) {
+            e.printStackTrace();
             tx.rollback();
         } finally {
             em.close();
