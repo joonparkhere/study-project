@@ -3,7 +3,7 @@ package hellojpa;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "TEST_MEMBER")
@@ -29,6 +29,20 @@ public class Member extends BaseEntity {
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
+
+    @Embedded
+    private Address homeAddress;
+
+//    @ElementCollection
+//    @CollectionTable(
+//            name = "ADDRESS",
+//            joinColumns = @JoinColumn(name = "MEMBER_ID")
+//    )
+//    private List<Address> addressHistory = new ArrayList<>();
+
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "MEMBER_ID")
+    private List<AddressEntity> addressHistory = new ArrayList<>();
 
     public Member() {
     }

@@ -203,18 +203,18 @@ public class JpaMain {
 //
 //            System.out.println("isMemberClass = " + (referMember instanceof Member) + ", " + (findMember instanceof Member));
 
-            Member member1 = new Member();
-            Member member2 = new Member();
-
-            Team team = new Team();
-            team.setName("teamA");
-
-            team.addMember(member1);
-            team.addMember(member2);
-
-            em.persist(team);
-
-            team.getMembers().remove(0);
+//            Member member1 = new Member();
+//            Member member2 = new Member();
+//
+//            Team team = new Team();
+//            team.setName("teamA");
+//
+//            team.addMember(member1);
+//            team.addMember(member2);
+//
+//            em.persist(team);
+//
+//            team.getMembers().remove(0);
 
             tx.commit();
         } catch (Exception e) {
