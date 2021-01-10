@@ -2,10 +2,10 @@ package hellojpa;
 
 import org.hibernate.Hibernate;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.util.List;
 
 public class JpaMain {
@@ -215,6 +215,98 @@ public class JpaMain {
 //            em.persist(team);
 //
 //            team.getMembers().remove(0);
+
+//            CriteriaBuilder cb = em.getCriteriaBuilder();
+//            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+//
+//            Root<Member> m = query.from(Member.class);
+//
+//            CriteriaQuery<Member> cq = query.select(m).where(cb.equal(m.get("username"), "kim"));
+//            List<Member> resultList = em.createQuery(cq).getResultList();
+
+//            TypedQuery<Member> query = em.createQuery("select m from Member as m where m.name=:name", Member.class)
+//                    .setParameter("name", "memberA");
+
+//            Member singleResult = query.getSingleResult();
+//            System.out.println("singleResult = " + singleResult.getId() + ": " + singleResult.getName());
+
+//            List<Member> resultList = query.getResultList();
+//            for (Member m: resultList) {
+//                System.out.println("m = " + m.getId() + ": " + m.getName());
+//            }
+
+//            List<Object[]> resultList = em.createQuery("select m.name, m.id from Member m")
+//                    .getResultList();
+//            for (Object[] o: resultList) {
+//                System.out.println("o = " + o[0] + ", " + o[1]);
+//            }
+
+//            List<MemberDTO> resultList = em.createQuery("select new hellojpa.MemberDTO(m.name, m.age) from Member m", MemberDTO.class)
+//                    .getResultList();
+//            for (MemberDTO m: resultList) {
+//                System.out.println("m = " + m.getName() + ", " + m.getAge());
+//            }
+
+//            List<Member> resultList = em.createQuery("select m from Member m order by m.age desc", Member.class)
+//                    .setFirstResult(0)
+//                    .setMaxResults(10)
+//                    .getResultList();
+//            for (Member m: resultList) {
+//                System.out.println("m = " + m.getAge());
+//            }
+
+//            List<Member> resultList= em.createQuery("select m from Member m inner join m.team t", Member.class)
+//                    .getResultList();
+//            List<Member> resultList = em.createQuery("select m from Member m left outer join m.team t", Member.class)
+//                    .getResultList();
+//            List<Member> resultList = em.createQuery("select m from Member m, Team t where m.name = t.name", Member.class)
+//                    .getResultList();
+//            for (Member m: resultList) {
+//                System.out.println("m = " + m.getId());
+//            }
+
+//            List<Member> resultList = em.createQuery("select m from Member m join m.team t on m.name = t.name", Member.class)
+//                    .getResultList();
+//            List<Member> resultList = em.createQuery("select m from Member m left join Team t on m.name = t.name", Member.class)
+//                    .getResultList();
+//            for (Member m: resultList) {
+//                System.out.println("m = " + m.getId());
+//            }
+
+//            List<Member> resultList = em.createQuery("select m from Member m where m.team = any (select t from Team t)", Member.class)
+//                    .getResultList();
+//            for (Member m: resultList) {
+//                System.out.println("m = " + m.getId());
+//            }
+
+//            String query =
+//                    "select " +
+//                            "case when m.age > 10 then '학생요금'" +
+//                            "     else '일반요금'" +
+//                            "end " +
+//                    "from Member m";
+//            String query = "select coalesce(m.name, '이름 없는 회원') from Member m";
+//            String query = "select nullif(m.name, 'memberA') from Member m";
+//            List<String> resultList = em.createQuery(query, String.class)
+//                    .getResultList();
+//            for (String s: resultList) {
+//                System.out.println("s = " + s);
+//            }
+
+//            String query = "select concat('a', 'b') from Member m";
+//            String query = "select upper(m.name) from Member m";
+//            String query = "select function('group_concat', m.name) from Member m";
+//            List<String> resultList = em.createQuery(query, String.class)
+//                    .getResultList();
+//            for (String s: resultList) {
+//                System.out.println("s = " + s);
+//            }
+//            String query = "select size(t.members) from Team t";
+//            List<Integer> resultList = em.createQuery(query, Integer.class)
+//                    .getResultList();
+//            for (Integer i: resultList) {
+//                System.out.println("i = " + i);
+//            }
 
             tx.commit();
         } catch (Exception e) {
