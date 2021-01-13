@@ -308,6 +308,41 @@ public class JpaMain {
 //                System.out.println("i = " + i);
 //            }
 
+//            String query = "select t from Member m join m.team t";
+//            List<Team> resultList = em.createQuery(query, Team.class)
+//                    .getResultList();
+
+//            String query = "select m from Member m join fetch m.team";
+//            List<Member> resultList = em.createQuery(query, Member.class)
+//                    .getResultList();
+//            for (Member m: resultList) {
+//                System.out.println("m = " + m.getName() + "-" + m.getTeam().getName());
+//            }
+
+//            String query = "select distinct t from Team t join fetch t.members where t.name='teamA'";
+//            List<Team> resultList = em.createQuery(query, Team.class)
+//                    .getResultList();
+//            for (Team t: resultList) {
+//                System.out.println("t = " + t.getId() + ": " + t.getName());
+//                for (Member m: t.getMembers()) {
+//                    System.out.println("    m = " + m.getName());
+//                }
+//            }
+
+//            List<Member> resultList = em.createNamedQuery("Member.findByName", Member.class)
+//                    .setParameter("name", "memberB")
+//                    .getResultList();
+//            for (Member m: resultList) {
+//                System.out.println("m = " + m.getId() + ": " + m.getName());
+//            }
+
+//            String query = "update Member m " +
+//                    "set m.age = age * 2 " +
+//                    "where m.age > 0";
+//            int resultCount = em.createQuery(query)
+//                    .executeUpdate();
+//            System.out.println("resultCount = " + resultCount);
+
             tx.commit();
         } catch (Exception e) {
             e.printStackTrace();

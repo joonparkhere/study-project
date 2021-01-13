@@ -11,6 +11,9 @@ import java.util.*;
         name = "MEMBER_SEQ_GENERATOR",
         sequenceName = "MEMBER_SEQ",
         initialValue = 1, allocationSize = 1)
+@NamedQuery(
+        name = "Member.findByName",
+        query = "select m from Member m where m.name = :name")
 public class Member extends BaseEntity {
 
     @Id
