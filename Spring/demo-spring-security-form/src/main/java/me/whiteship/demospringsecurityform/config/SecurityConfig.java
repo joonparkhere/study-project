@@ -2,6 +2,7 @@ package me.whiteship.demospringsecurityform.config;
 
 import me.whiteship.demospringsecurityform.account.AccountService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDecisionManager;
 import org.springframework.security.access.AccessDecisionVoter;
@@ -10,13 +11,14 @@ import org.springframework.security.access.hierarchicalroles.RoleHierarchyImpl;
 import org.springframework.security.access.vote.AffirmativeBased;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 <<<<<<< HEAD
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.context.SecurityContextHolder;
 =======
->>>>>>> parent of d3aa53d... STUDY Spring Security Filter (1)
+import org.springframework.security.config.http.SessionCreationPolicy;
+>>>>>>> origin/master
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
 
@@ -53,11 +55,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+    public void configure(WebSecurity web) throws Exception {
+        // 정적인 리소스를 걸러내는 걸 권장
+//        web.ignoring().mvcMatchers("/favicon.ico");
+        web.ignoring().requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    }
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .mvcMatchers("/", "/info", "/account/**").permitAll()
+                .mvcMatchers("/", "/info", "/account/**", "/signUp").permitAll()
                 .mvcMatchers("/admin").hasRole("ADMIN")
                 .mvcMatchers("/user").hasRole("USER")
+//                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .anyRequest().authenticated()
 //                .accessDecisionManager(accessDecisionManager());
                 .expressionHandler(expressionHandler());
@@ -67,13 +77,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
 
         http.httpBasic();
-<<<<<<< HEAD
 
         http.logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
 
+<<<<<<< HEAD
+=======
         http.sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .sessionFixation()
@@ -83,9 +94,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .expiredUrl("/")
                     .maxSessionsPreventsLogin(true);
 
+>>>>>>> origin/master
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
-=======
->>>>>>> parent of d3aa53d... STUDY Spring Security Filter (1)
     }
 
 //    @Override
