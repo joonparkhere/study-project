@@ -14,10 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-<<<<<<< HEAD
-=======
 import org.springframework.security.config.http.SessionCreationPolicy;
->>>>>>> origin/master
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
@@ -83,8 +80,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
 
-<<<<<<< HEAD
-=======
         http.sessionManagement()
 //                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .sessionFixation()
@@ -94,7 +89,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //                    .expiredUrl("/")
                     .maxSessionsPreventsLogin(true);
 
->>>>>>> origin/master
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
 
