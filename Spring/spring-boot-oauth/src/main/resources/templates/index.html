@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+    <h1>Spring Boot OAuth2</h1>
+    <a th:if="!${userName}" href="/oauth2/authorization/google">구글 로그인</a>
+    <p th:if="${userName}">
+        Logged in as:
+        <span th:text="${userName}"></span>
+    </p>
+</body>
+</html>
