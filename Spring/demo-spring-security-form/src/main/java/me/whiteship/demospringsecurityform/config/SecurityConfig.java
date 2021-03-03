@@ -14,6 +14,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.access.expression.DefaultWebSecurityExpressionHandler;
 import org.springframework.security.web.access.expression.WebExpressionVoter;
@@ -67,13 +68,26 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
 //                .accessDecisionManager(accessDecisionManager());
                 .expressionHandler(expressionHandler());
-        http.formLogin();
+
+        http.formLogin()
+                .loginPage("/login")
+                .permitAll();
+
         http.httpBasic();
 
         http.logout()
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/")
                 .invalidateHttpSession(true);
+
+        http.sessionManagement()
+//                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .sessionFixation()
+                    .changeSessionId()
+                .invalidSessionUrl("/")
+                .maximumSessions(1)
+//                    .expiredUrl("/")
+                    .maxSessionsPreventsLogin(true);
 
         SecurityContextHolder.setStrategyName(SecurityContextHolder.MODE_INHERITABLETHREADLOCAL);
     }
