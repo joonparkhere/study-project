@@ -12,6 +12,10 @@ import javax.persistence.*;
         name = "Member.findByUsername",
         query = "select m from Member m where m.username = :username"   // 문법 오류가 있으면 컴파일 에러를 뱉어냄
 )
+//@NamedEntityGraph(
+//        name = "Member.all",
+//        attributeNodes = @NamedAttributeNode("team")
+//)
 public class Member {
 
     @Id @GeneratedValue
