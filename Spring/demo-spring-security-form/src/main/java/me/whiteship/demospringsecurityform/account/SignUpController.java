@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/signUp")
-public class SingUpController {
+public class SignUpController {
 
     @Autowired
     AccountService accountService;
